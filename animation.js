@@ -24,7 +24,7 @@ var all_types = { // Type : Letter, Number, Q1, Q2, Verse, Song, Summary // Satu
                 "Threes are self-assured, attractive, and charming. Ambitious, competent, and energetic, they can also be status-conscious and highly driven for advancement. They are diplomatic and poised, but can also be overly concerned with their image and what others think of them. They typically have problems with workaholism and competitiveness. At their Best: self-accepting, authentic, everything they seem to be—role models who inspire others."],
     "Type4": ["I",
                 4,
-                "It's something that will make me feel 'me.' I feel comfortable and like I belong when I participate in this.",
+                "It's something that will make me feel 'me.' I feel comfortable and a sense of belonging when I participate in this.",
                 "Feeling misunderstood, or sense anger or abandonment from someone else.",
                 "John 15:11, 'These things I have spoken to you, that my joy may be in you, and that your joy may be full.' The 'these things' that Jesus is referring to are unpacked in John 15:1-10, the essence of which is summed up when He says, 'Abide in me, and I in you' (15:4). Jesus is describing the glorious reality of the mutual indwelling of God and man through faith in the gospel. This is uniquely meaningful for a Four in that it reassures them that nothing is missing. Their identity and sense of self is complete in Christ. Their joy is full, for it is the very joy of Jesus Himself.",
                 "https://www.youtube.com/embed/9qBhMFBo37Y",
