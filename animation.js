@@ -173,58 +173,62 @@ function fillIdentify() {
 }
 
 function submitAnswer() {
-    var length = compArray.length;
-    var input = $("input:checked")[0].value;
-    var currentComp = compArray[count];
+    if ($("input:checked")[0] != undefined) {
+        var length = compArray.length;
+        var input = $("input:checked")[0].value;
+        var currentComp = compArray[count];
 
-    let Type1 = compArray[count].substr(0, 5);
-    let Type2 = compArray[count].substr(5);
+        let Type1 = compArray[count].substr(0, 5);
+        let Type2 = compArray[count].substr(5);
 
-    let num1 = all_types[Type1][1];
-    let num2 = all_types[Type2][1];
+        let num1 = all_types[Type1][1];
+        let num2 = all_types[Type2][1];
 
-    // revised
-    let firstType = Math.min(num1, num2);
-    let secondType = Math.max(num1, num2);
+        // revised
+        let firstType = Math.min(num1, num2);
+        let secondType = Math.max(num1, num2);
 
-    if (length == 3) {
+        if (length == 3) {
 
-        if (input == "A") {
-            localStorage.setItem("probType", firstType);
-            localStorage.setItem("notType", secondType);
-        } else {
-            localStorage.setItem("probType", secondType);
-            localStorage.setItem("notType", firstType);
-        }
+            if (input == "A") {
+                localStorage.setItem("probType", firstType);
+                localStorage.setItem("notType", secondType);
+            } else {
+                localStorage.setItem("probType", secondType);
+                localStorage.setItem("notType", firstType);
+            }
 
-        compArray.splice(count, 1);
-    } else if (length == 2) {
-        let probType = localStorage.getItem("probType");
-        let notType = localStorage.getItem("notType");
-        var newPick;
-
-        if (input == "A") {
-            newPick = firstType;
-        } else {
-            newPick = secondType; 
-        }
-
-        if (notType == newPick || probType == newPick) {
-            localStorage.setItem("final", "Type"+probType);
-            window.location.href = "results.html";
-        } else {
             compArray.splice(count, 1);
-        }
-    } else {
-        if (input == "A") {
-            localStorage.setItem("final", "Type"+firstType);
-            window.location.href = "results.html";
+        } else if (length == 2) {
+            let probType = localStorage.getItem("probType");
+            let notType = localStorage.getItem("notType");
+            var newPick;
+
+            if (input == "A") {
+                newPick = firstType;
+            } else {
+                newPick = secondType; 
+            }
+
+            if (notType == newPick || probType == newPick) {
+                localStorage.setItem("final", "Type"+probType);
+                window.location.href = "results.html";
+            } else {
+                compArray.splice(count, 1);
+            }
         } else {
-            localStorage.setItem("final", "Type"+secondType);
-            window.location.href = "results.html";
+            if (input == "A") {
+                localStorage.setItem("final", "Type"+firstType);
+                window.location.href = "results.html";
+            } else {
+                localStorage.setItem("final", "Type"+secondType);
+                window.location.href = "results.html";
+            }
         }
+        nextQuestion();
+    } else {
+        alert("Please either skip or select an answer.");
     }
-    nextQuestion();
 }
 
 function nextQuestion() {
