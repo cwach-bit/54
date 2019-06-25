@@ -179,8 +179,6 @@ function submitAnswer() {
 
     let num1 = all_types[Type1][1];
     let num2 = all_types[Type2][1];
-    console.log(num1);
-    console.log(num2);
 
     // revised
     let firstType = Math.min(num1, num2);
@@ -210,8 +208,7 @@ function submitAnswer() {
             newPick = secondType; 
         }
 
-        if (notType == newPick) {
-            console.log("SWITCH");
+        if (notType == newPick || probType == newPick) {
             localStorage.setItem("final", "Type"+probType);
             window.location.href = "results.html";
         } else {
@@ -227,31 +224,21 @@ function submitAnswer() {
             window.location.href = "results.html";
         }
     }
-
+    nextQuestion();
 }
 
-$(document).ready(function() {
-    $(".identify").click(function() {
-        event.preventDefault();
-        var length = compArray.length;
-        if (length == 3) {
-            if (count == 2) {
-                count = 0;
-            } else {
-                count += 1;
-            }
-        } else if (length == 2) {
-            if (count >= 1) {
-                count = 0;
-            } else {
-                count += 1;
-            }
-        } else {
-            count = 0;
-        }
-        fillIdentify();
-    });
-});
+function nextQuestion() {
+    event.preventDefault();
+    var length = compArray.length;
+
+    if (count >= length) {
+        count = 0;
+    } else {
+        count += 1;
+    }
+
+    fillIdentify();
+}
 
 // RESULTS
 function fillResults() {
