@@ -139,6 +139,9 @@ var compArray = [localStorage.getItem("1") + localStorage.getItem("2"),
                 localStorage.getItem("2") + localStorage.getItem("3")];
 
 function fillIdentify() {
+    console.log(count);
+    console.log(compArray);
+    console.log(compArray[count]);
     let firstType = compArray[count].substr(0, 5);
     let secondType = compArray[count].substr(5);
 
@@ -184,8 +187,6 @@ function submitAnswer() {
     let firstType = Math.min(num1, num2);
     let secondType = Math.max(num1, num2);
 
-    console.log(firstType);
-    console.log(secondType);
     if (length == 3) {
 
         if (input == "A") {
@@ -219,7 +220,6 @@ function submitAnswer() {
             localStorage.setItem("final", "Type"+firstType);
             window.location.href = "results.html";
         } else {
-            console.log(secondType);
             localStorage.setItem("final", "Type"+secondType);
             window.location.href = "results.html";
         }
@@ -231,12 +231,12 @@ function nextQuestion() {
     event.preventDefault();
     var length = compArray.length;
 
-    if (count >= length) {
+    if (count >= length - 1) {
         count = 0;
     } else {
         count += 1;
     }
-
+    console.log("this is count" + count);
     fillIdentify();
 }
 
