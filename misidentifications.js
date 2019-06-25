@@ -65,7 +65,7 @@ var mistype7 = {"1": ["This type, when stressed, looks like an unhealthy Type Aâ
                 "5": ["This type is highly gregarious.", "Their gift is breadth of vision and synthesis.", "Focus more on the positive side of things.", "This type, when growing, looks like a healthy Type Aâ€”focused and fascinated by life."],
                 "6": ["This type tends to react to anxiety by looking for enjoyable distractions.", "Much more spontaneous, resistant to having too many expectations placed on them."],
                 "8": ["This type is primarily interested in variety.", "See themselves as idealistic optimists, often getting ahead of themselves."],
-                "9": ["This type tends to avoid conflict or over excitement.", "As they become unhealthier, become more passive and indifferent.", "Seeks to maintain state of contentment--not too excited nor in discomfort."],
+                "9": ["This type loves excitement.", "As they become unhealthier, become more demanding and excessive.", "Seeks for euphoria and elation."],
                 };
 
 var mistype8 = {"1": ["This type tries to convince using personal convictions and own self-confidence.", "View justice with more of a visceral response, rushing in to protect others.", "This type is more given over to their gut response."],
