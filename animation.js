@@ -92,9 +92,7 @@ function saveTopThree(inputs) {
 $(window).load(function() {
     accordion();
     explainTopThree(); // on threetypes.html
-    fillQuestionOne(); // on questionOne.html
-    fillQuestionTwo(); // on questionTwo.html
-    fillQuestionThree(); // on questionThree.html
+    fillIdentify();
     fillResults(); // on fillResults.html
 });
 
@@ -116,129 +114,242 @@ function explainTopThree() {
     let exp2 = all_types[sec][6];
     let exp3 = all_types[third][6];
 
-    $("#firstTypeName").html("Type " + num1);
+    $("#firstTypeName").html("Type " +num1);
     $("#secondTypeName").html("Type " + num2);
     $("#thirdTypeName").html("Type " + num3);
 
     $("#readFirstType").html(exp1);
     $("#readSecondType").html(exp2);
     $("#readThirdType").html(exp3);
+
+    let array = [];
+    array.push(first+sec);
+    array.push(first+third);
+    array.push(sec+third);
+    localStorage.setItem("comparisons", array);
 }
 
 function questionOne() {
-    window.location.href = "questionOne.html";
+    window.location.href = "identify.html";
 }
+
+var count = 0;
+var compArray = [localStorage.getItem("1") + localStorage.getItem("2"), 
+                localStorage.getItem("1") + localStorage.getItem("3"),
+                localStorage.getItem("2") + localStorage.getItem("3")];
+
+function fillIdentify() {
+    let firstType = compArray[count].substr(0, 5);
+    let secondType = compArray[count].substr(5);
+
+    let num1 = all_types[firstType][1];
+    let num2 = all_types[secondType][1];
+
+    let revisedNumA = Math.min(num1, num2);
+    let revisedNumB = Math.max(num1, num2);
+
+    let descAType = list_mistypes[revisedNumA - 1];
+    let descBType = list_mistypes[revisedNumB - 1];
+
+    let descA = descAType[revisedNumB];
+    let descB = descBType[revisedNumA];
+    let comp = mistypes[revisedNumA.toString() + revisedNumB.toString()];
+
+    var html = "";
+    html += "<tr><th>Both</th><th>Type A</th><th>Type B</th></tr>";
+    
+    for (var j=0; j < descA.length; j++) {
+        html += "<tr>";
+        html += "<td>" + comp[j] + "</td>";
+        html += "<td>" + descA[j] + "</td>";
+        html += "<td>" + descB[j] + "</td>";
+        html += "</tr>"
+    }
+    $('input:checked').attr('checked',false);
+    $("#tbl").html(html);
+}
+
+function submitAnswer() {
+    var length = compArray.length;
+    var input = $("input:checked")[0].value;
+    var currentComp = compArray[count];
+    let firstType = compArray[count].substr(0, 5);
+    let secondType = compArray[count].substr(5);
+    if (length == 3) {
+
+        if (input == "A") {
+            localStorage.setItem("suspectType", firstType);
+            localStorage.setItem("unsuspectType", secondType);
+        } else {
+            localStorage.setItem("suspectType", secondType);
+            localStorage.setItem("unsuspectType", firstType);
+        }
+
+        compArray.splice(count, 1);
+    } else if (length == 2) {
+        let suspectType = localStorage.getItem("suspectType");
+        let unsuspectType = localStorage.getItem("unsuspectType");
+        var newPick;
+
+        if (input == "A") {
+            newPick = firstType;
+        } else {
+            newPick = secondType;        
+        }
+        console.log(unsuspectType);
+        console.log(newPick);
+        if (suspectType == newPick) {
+            console.log("SWITCH");
+            localStorage.setItem("final", unsuspectType);
+            window.location.href = "results.html";
+        } else {
+            compArray.splice(count, 1);
+        }
+    } else {
+        if (input == "A") {
+            localStorage.setItem("final", firstType);
+            window.location.href = "results.html";
+        } else {
+            localStorage.setItem("final", secondType);
+            window.location.href = "results.html";
+        }
+    }
+
+}
+
+$(document).ready(function() {
+    $(".identify").click(function() {
+        event.preventDefault();
+        var length = compArray.length;
+        if (length == 3) {
+            if (count == 2) {
+                count = 0;
+            } else {
+                count += 1;
+            }
+        } else if (length == 2) {
+            if (count >= 1) {
+                count = 0;
+            } else {
+                count += 1;
+            }
+        } else {
+            count = 0;
+        }
+        fillIdentify();
+    });
+});
 
 // QUESTION ONE
-function fillQuestionOne() {
-    let first = localStorage.getItem("1");
-    let sec = localStorage.getItem("2");
-    let third = localStorage.getItem("3");
+// function fillQuestionOne() {
+//     let first = localStorage.getItem("1");
+//     let sec = localStorage.getItem("2");
+//     let third = localStorage.getItem("3");
 
-    let num1 = all_types[first][1];
-    let num2 = all_types[sec][1];
-    let num3 = all_types[third][1];
+//     let num1 = all_types[first][1];
+//     let num2 = all_types[sec][1];
+//     let num3 = all_types[third][1];
 
-    let txt1 = all_types[first][2];
-    let txt2 = all_types[sec][2];
-    let txt3 = all_types[third][2];
+//     let txt1 = all_types[first][2];
+//     let txt2 = all_types[sec][2];
+//     let txt3 = all_types[third][2];
 
-    $("#q1a").html(" A. " + txt2);
-    $("#q1b").html(" B. " + txt3);
-    $("#q1c").html(" C. " + txt1);
+//     $("#q1a").html(" A. " + txt2);
+//     $("#q1b").html(" B. " + txt3);
+//     $("#q1c").html(" C. " + txt1);
 
-    $("#q1answers").hide().html("<hr><div id=a1a>" + "A is Type " + num2 + "</div>" + 
-                                "<div id=a1b>" + "B is Type " + num3 + "</div>" +
-                                "<div id=a1c>" + "C is Type " + num1 + "</div>");
-}
+//     $("#q1answers").hide().html("<hr><div id=a1a>" + "A is Type " + num2 + "</div>" + 
+//                                 "<div id=a1b>" + "B is Type " + num3 + "</div>" +
+//                                 "<div id=a1c>" + "C is Type " + num1 + "</div>");
+// }
 
-var click = 0;
-function questionOneAnswer() {
-    event.preventDefault();
-    if (click == 0) {
-        var input = $("input:checked")[0].value;
-        console.log(input);
-        // jank short conditional
-        if (input == 1) {
-            $("#a1c").css({"font-weight":"bold"});
-        } else if (input == 2) {
-            $("#a1a").css({"font-weight":"bold"});
-        } else {
-            $("#a1b").css({"font-weight":"bold"});
-        }
-        $("#q1answers").toggle();
-        click += 1;
-    } else {
-        window.location.href = "questionTwo.html";
-    }
-}
+// var click = 0;
+// function questionOneAnswer() {
+//     event.preventDefault();
+//     if (click == 0) {
+//         var input = $("input:checked")[0].value;
+//         console.log(input);
+//         // jank short conditional
+//         if (input == 1) {
+//             $("#a1c").css({"font-weight":"bold"});
+//         } else if (input == 2) {
+//             $("#a1a").css({"font-weight":"bold"});
+//         } else {
+//             $("#a1b").css({"font-weight":"bold"});
+//         }
+//         $("#q1answers").toggle();
+//         click += 1;
+//     } else {
+//         window.location.href = "questionTwo.html";
+//     }
+// }
 
-// QUESTION TWO
-function fillQuestionTwo() {
-    let first = localStorage.getItem("1");
-    let sec = localStorage.getItem("2");
-    let third = localStorage.getItem("3");
+// // QUESTION TWO
+// function fillQuestionTwo() {
+//     let first = localStorage.getItem("1");
+//     let sec = localStorage.getItem("2");
+//     let third = localStorage.getItem("3");
 
-    let num1 = all_types[first][1];
-    let num2 = all_types[sec][1];
-    let num3 = all_types[third][1];
+//     let num1 = all_types[first][1];
+//     let num2 = all_types[sec][1];
+//     let num3 = all_types[third][1];
 
-    let txt1 = all_types[first][3];
-    let txt2 = all_types[sec][3];
-    let txt3 = all_types[third][3];
+//     let txt1 = all_types[first][3];
+//     let txt2 = all_types[sec][3];
+//     let txt3 = all_types[third][3];
 
-    $("#q2a").html(" A. " + txt3);
-    $("#q2b").html(" B. " + txt1);
-    $("#q2c").html(" C. " + txt2);
+//     $("#q2a").html(" A. " + txt3);
+//     $("#q2b").html(" B. " + txt1);
+//     $("#q2c").html(" C. " + txt2);
 
-    $("#q2answers").hide().html("<hr><div id=a2a>" + "A is Type " + num3 + "</div>" + 
-                                "<div id=a2b>" + "B is Type " + num1 + "</div>" +
-                                "<div id=a2c>" + "C is Type " + num2 + "</div>");
-}
+//     $("#q2answers").hide().html("<hr><div id=a2a>" + "A is Type " + num3 + "</div>" + 
+//                                 "<div id=a2b>" + "B is Type " + num1 + "</div>" +
+//                                 "<div id=a2c>" + "C is Type " + num2 + "</div>");
+// }
 
-function questionTwoAnswer() {
-    event.preventDefault();
-    if (click == 0) {
-        var input = $("input:checked")[0].value;
-        // jank short conditional
-        if (input == 1) {
-            $("#a2b").css({"font-weight":"bold"});
-        } else if (input == 2) {
-            $("#a2c").css({"font-weight":"bold"});
-        } else {
-            $("#a2a").css({"font-weight":"bold"});
-        }
-        $("#q2answers").toggle();
-        click += 1;
-    } else {
-        window.location.href = "questionThree.html";
-    }
-}
+// function questionTwoAnswer() {
+//     event.preventDefault();
+//     if (click == 0) {
+//         var input = $("input:checked")[0].value;
+//         // jank short conditional
+//         if (input == 1) {
+//             $("#a2b").css({"font-weight":"bold"});
+//         } else if (input == 2) {
+//             $("#a2c").css({"font-weight":"bold"});
+//         } else {
+//             $("#a2a").css({"font-weight":"bold"});
+//         }
+//         $("#q2answers").toggle();
+//         click += 1;
+//     } else {
+//         window.location.href = "questionThree.html";
+//     }
+// }
 
-// QUESTION THREE
-function fillQuestionThree() {
-    let first = localStorage.getItem("1");
-    let sec = localStorage.getItem("2");
-    let third = localStorage.getItem("3");
+// // QUESTION THREE
+// function fillQuestionThree() {
+//     let first = localStorage.getItem("1");
+//     let sec = localStorage.getItem("2");
+//     let third = localStorage.getItem("3");
 
-    let num1 = all_types[first][1];
-    let num2 = all_types[sec][1];
-    let num3 = all_types[third][1];
+//     let num1 = all_types[first][1];
+//     let num2 = all_types[sec][1];
+//     let num3 = all_types[third][1];
 
-    $("#q3a").html(" A. Type " + num3);
-    $("#q3b").html(" B. Type " + num1);
-    $("#q3c").html(" C. Type " + num2);
-}
+//     $("#q3a").html(" A. Type " + num3);
+//     $("#q3b").html(" B. Type " + num1);
+//     $("#q3c").html(" C. Type " + num2);
+// }
 
-function showResults() {
-    event.preventDefault();
-    var input = $("input:checked")[0].value;
-    let final = localStorage.getItem(input);
-    localStorage.setItem("final", final);
-    // localStorage.setItem("jankResult", 1);
+// function showResults() {
+//     event.preventDefault();
+//     var input = $("input:checked")[0].value;
+//     let final = localStorage.getItem(input);
+//     localStorage.setItem("final", final);
+//     // localStorage.setItem("jankResult", 1);
 
-    window.location.href = "results.html";
-}
+//     window.location.href = "results.html";
+// }
 
 // RESULTS
 function fillResults() {
