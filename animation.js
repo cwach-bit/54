@@ -179,11 +179,15 @@ function submitAnswer() {
 
     let num1 = all_types[Type1][1];
     let num2 = all_types[Type2][1];
+    console.log(num1);
+    console.log(num2);
 
     // revised
     let firstType = Math.min(num1, num2);
     let secondType = Math.max(num1, num2);
 
+    console.log(firstType);
+    console.log(secondType);
     if (length == 3) {
 
         if (input == "A") {
@@ -192,7 +196,6 @@ function submitAnswer() {
         } else {
             localStorage.setItem("probType", secondType);
             localStorage.setItem("notType", firstType);
-            console.log(secondType);
         }
 
         compArray.splice(count, 1);
@@ -205,23 +208,22 @@ function submitAnswer() {
             newPick = firstType;
         } else {
             newPick = secondType; 
-            console.log(secondType);       
         }
 
         if (notType == newPick) {
             console.log("SWITCH");
-            localStorage.setItem("final", probType);
+            localStorage.setItem("final", "Type"+probType);
             window.location.href = "results.html";
         } else {
             compArray.splice(count, 1);
         }
     } else {
         if (input == "A") {
-            localStorage.setItem("final", "Type" + firstType);
+            localStorage.setItem("final", "Type"+firstType);
             window.location.href = "results.html";
         } else {
             console.log(secondType);
-            localStorage.setItem("final", "Type" + secondType);
+            localStorage.setItem("final", "Type"+secondType);
             window.location.href = "results.html";
         }
     }
