@@ -173,44 +173,55 @@ function submitAnswer() {
     var length = compArray.length;
     var input = $("input:checked")[0].value;
     var currentComp = compArray[count];
-    let firstType = compArray[count].substr(0, 5);
-    let secondType = compArray[count].substr(5);
+
+    let Type1 = compArray[count].substr(0, 5);
+    let Type2 = compArray[count].substr(5);
+
+    let num1 = all_types[Type1][1];
+    let num2 = all_types[Type2][1];
+
+    // revised
+    let firstType = Math.min(num1, num2);
+    let secondType = Math.max(num1, num2);
+
     if (length == 3) {
 
         if (input == "A") {
-            localStorage.setItem("suspectType", firstType);
-            localStorage.setItem("unsuspectType", secondType);
+            localStorage.setItem("probType", firstType);
+            localStorage.setItem("notType", secondType);
         } else {
-            localStorage.setItem("suspectType", secondType);
-            localStorage.setItem("unsuspectType", firstType);
+            localStorage.setItem("probType", secondType);
+            localStorage.setItem("notType", firstType);
+            console.log(secondType);
         }
 
         compArray.splice(count, 1);
     } else if (length == 2) {
-        let suspectType = localStorage.getItem("suspectType");
-        let unsuspectType = localStorage.getItem("unsuspectType");
+        let probType = localStorage.getItem("probType");
+        let notType = localStorage.getItem("notType");
         var newPick;
 
         if (input == "A") {
             newPick = firstType;
         } else {
-            newPick = secondType;        
+            newPick = secondType; 
+            console.log(secondType);       
         }
-        console.log(unsuspectType);
-        console.log(newPick);
-        if (suspectType == newPick) {
+
+        if (notType == newPick) {
             console.log("SWITCH");
-            localStorage.setItem("final", unsuspectType);
+            localStorage.setItem("final", probType);
             window.location.href = "results.html";
         } else {
             compArray.splice(count, 1);
         }
     } else {
         if (input == "A") {
-            localStorage.setItem("final", firstType);
+            localStorage.setItem("final", "Type" + firstType);
             window.location.href = "results.html";
         } else {
-            localStorage.setItem("final", secondType);
+            console.log(secondType);
+            localStorage.setItem("final", "Type" + secondType);
             window.location.href = "results.html";
         }
     }
@@ -239,117 +250,6 @@ $(document).ready(function() {
         fillIdentify();
     });
 });
-
-// QUESTION ONE
-// function fillQuestionOne() {
-//     let first = localStorage.getItem("1");
-//     let sec = localStorage.getItem("2");
-//     let third = localStorage.getItem("3");
-
-//     let num1 = all_types[first][1];
-//     let num2 = all_types[sec][1];
-//     let num3 = all_types[third][1];
-
-//     let txt1 = all_types[first][2];
-//     let txt2 = all_types[sec][2];
-//     let txt3 = all_types[third][2];
-
-//     $("#q1a").html(" A. " + txt2);
-//     $("#q1b").html(" B. " + txt3);
-//     $("#q1c").html(" C. " + txt1);
-
-//     $("#q1answers").hide().html("<hr><div id=a1a>" + "A is Type " + num2 + "</div>" + 
-//                                 "<div id=a1b>" + "B is Type " + num3 + "</div>" +
-//                                 "<div id=a1c>" + "C is Type " + num1 + "</div>");
-// }
-
-// var click = 0;
-// function questionOneAnswer() {
-//     event.preventDefault();
-//     if (click == 0) {
-//         var input = $("input:checked")[0].value;
-//         console.log(input);
-//         // jank short conditional
-//         if (input == 1) {
-//             $("#a1c").css({"font-weight":"bold"});
-//         } else if (input == 2) {
-//             $("#a1a").css({"font-weight":"bold"});
-//         } else {
-//             $("#a1b").css({"font-weight":"bold"});
-//         }
-//         $("#q1answers").toggle();
-//         click += 1;
-//     } else {
-//         window.location.href = "questionTwo.html";
-//     }
-// }
-
-// // QUESTION TWO
-// function fillQuestionTwo() {
-//     let first = localStorage.getItem("1");
-//     let sec = localStorage.getItem("2");
-//     let third = localStorage.getItem("3");
-
-//     let num1 = all_types[first][1];
-//     let num2 = all_types[sec][1];
-//     let num3 = all_types[third][1];
-
-//     let txt1 = all_types[first][3];
-//     let txt2 = all_types[sec][3];
-//     let txt3 = all_types[third][3];
-
-//     $("#q2a").html(" A. " + txt3);
-//     $("#q2b").html(" B. " + txt1);
-//     $("#q2c").html(" C. " + txt2);
-
-//     $("#q2answers").hide().html("<hr><div id=a2a>" + "A is Type " + num3 + "</div>" + 
-//                                 "<div id=a2b>" + "B is Type " + num1 + "</div>" +
-//                                 "<div id=a2c>" + "C is Type " + num2 + "</div>");
-// }
-
-// function questionTwoAnswer() {
-//     event.preventDefault();
-//     if (click == 0) {
-//         var input = $("input:checked")[0].value;
-//         // jank short conditional
-//         if (input == 1) {
-//             $("#a2b").css({"font-weight":"bold"});
-//         } else if (input == 2) {
-//             $("#a2c").css({"font-weight":"bold"});
-//         } else {
-//             $("#a2a").css({"font-weight":"bold"});
-//         }
-//         $("#q2answers").toggle();
-//         click += 1;
-//     } else {
-//         window.location.href = "questionThree.html";
-//     }
-// }
-
-// // QUESTION THREE
-// function fillQuestionThree() {
-//     let first = localStorage.getItem("1");
-//     let sec = localStorage.getItem("2");
-//     let third = localStorage.getItem("3");
-
-//     let num1 = all_types[first][1];
-//     let num2 = all_types[sec][1];
-//     let num3 = all_types[third][1];
-
-//     $("#q3a").html(" A. Type " + num3);
-//     $("#q3b").html(" B. Type " + num1);
-//     $("#q3c").html(" C. Type " + num2);
-// }
-
-// function showResults() {
-//     event.preventDefault();
-//     var input = $("input:checked")[0].value;
-//     let final = localStorage.getItem(input);
-//     localStorage.setItem("final", final);
-//     // localStorage.setItem("jankResult", 1);
-
-//     window.location.href = "results.html";
-// }
 
 // RESULTS
 function fillResults() {
