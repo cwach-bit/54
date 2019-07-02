@@ -447,17 +447,17 @@ function identifyWings(array) {
         }
         
         if (array.includes(lowerNum)) {
-            text = text + "<b>" + num + "w" + lowerNum + "</b>, ";
+            text = text + "<a href='" + wing_url + "type-" + num + "-wing-" + lowerNum + "'>" + "<b>" + num + "w" + lowerNum + "</b></a>, ";
         }
 
         if (array.includes(higherNum)) {
-            text = text + "<b>" + num + "w" + higherNum + "</b>, ";
+            text = text + "<a href='" + wing_url + "type-" + num + "-wing-" + higherNum + "'>" + "<b>" + num + "w" + higherNum + "</b></a>, ";
         }
     }
     
     if (text != "<li>There are possible wing combinations: ") {
         text = text.substring(0, text.length - 2);
-        text += "--which indicate that one of these combinations may be your dominant and wing type.</li>";
+        text += "--which indicate that one of these combinations may be your dominant and wing type. Click on the wings types to know more!</li>";
         $(".wings").html(text);
     }
     
