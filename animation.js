@@ -481,7 +481,6 @@ function identifyArrows(array) {
         if (array.includes(Number(growth))) {
             text = text + "<b>Type " + num + "</b> integrates into <b>Type " + growth + "</b>. ";
         }
-        console.log(growth);
 
         var stress = dict[num][1];
         if (array.includes(Number(stress))) {
