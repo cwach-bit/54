@@ -488,12 +488,13 @@ function identifyArrows(array) {
 
         var stress = dict[num][1];
         if (array.includes(Number(stress))) {
-            text = text + "<b>Type " + num + "</b> disintegrates into <b>Type " + stress + "</b>. </li>";
+            text = text + "<b>Type " + num + "</b> disintegrates into <b>Type " + stress + "</b>.";
         }
         
     }
 
     if (text != "<li>You may also be confusing your dominant type with your stress and/or growth types: ") {
+        text += "</li>";
         $(".arrows").html(text);
     }    
 }
