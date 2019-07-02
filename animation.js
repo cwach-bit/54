@@ -93,7 +93,8 @@ $(window).load(function() {
     accordion();
     explainTopThree(); // on threetypes.html
     fillIdentify();
-    fillResults(); // on fillResults.html
+    fillIncResults(); // on inconclusiveresults.html
+    fillResults(); // on results.html
 });
 
 function explainTopThree() {
@@ -139,9 +140,6 @@ var compArray = [localStorage.getItem("1") + localStorage.getItem("2"),
                 localStorage.getItem("2") + localStorage.getItem("3")];
 
 function fillIdentify() {
-    console.log(count);
-    console.log(compArray);
-    console.log(compArray[count]);
     let firstType = compArray[count].substr(0, 5);
     let secondType = compArray[count].substr(5);
 
@@ -191,43 +189,62 @@ function submitAnswer() {
         if (length == 3) {
 
             if (input == "A") {
-                localStorage.setItem("probType", firstType);
-                localStorage.setItem("notType", secondType);
+                localStorage.setItem("firstPlace", firstType);
+                localStorage.setItem("secondPlace", secondType);
             } else {
-                localStorage.setItem("probType", secondType);
-                localStorage.setItem("notType", firstType);
+                localStorage.setItem("firstPlace", secondType);
+                localStorage.setItem("secondPlace", firstType);
             }
 
             compArray.splice(count, 1);
         } else if (length == 2) {
-            let probType = localStorage.getItem("probType");
-            let notType = localStorage.getItem("notType");
+            let firstPlace = localStorage.getItem("firstPlace");
+            let secondPlace = localStorage.getItem("secondPlace");
             var newPick;
+            var notPick;
 
             if (input == "A") {
                 newPick = firstType;
+                notPick = secondType;
             } else {
                 newPick = secondType; 
+                notPick = firstType;
             }
 
-            if (notType == newPick || probType == newPick) {
-                localStorage.setItem("final", "Type"+probType);
+            if (firstPlace == newPick) {
+                localStorage.setItem("final", "Type"+firstPlace);
                 window.location.href = "results.html";
-            } else {
-                compArray.splice(count, 1);
+            } else if (secondPlace == newPick) {
+                localStorage.setItem("secondPlace", "N/A"); // first place has to be picked next to be valid. no other will be valid.
+            } else if (notPick == firstPlace) { // we reach here if the newPick was the new option that entered the scene. if newpick was picked over first place...
+                localStorage.setItem("firstPlace", newPick);
+                localStorage.setItem("secondPlace", "N/A"); // first place has to be picked to be valid
+            } else if (notPick == secondPlace) { // we reach here if the newPick was the new option that entered the scene. if newpick was picked over second place...
+                localStorage.setItem("secondPlace", newPick); // both are valid
             }
+            
+            compArray.splice(count, 1);
         } else {
+            let firstPlace = localStorage.getItem("firstPlace");
+            let secondPlace = localStorage.getItem("secondPlace");
+            var finalPick;
+
             if (input == "A") {
-                localStorage.setItem("final", "Type"+firstType);
+                finalPick = firstType;
+            } else {
+                finalPick = secondType; 
+            }
+
+            if (finalPick == firstPlace || finalPick == secondPlace) {
+                localStorage.setItem("final", "Type"+finalPick);
                 window.location.href = "results.html";
             } else {
-                localStorage.setItem("final", "Type"+secondType);
-                window.location.href = "results.html";
+                window.location.href = "inconclusiveresults.html";
             }
         }
         nextQuestion();
     } else {
-        alert("Please either skip or select an answer.");
+        alert("Please either skip or select an answer");
     }
 }
 
@@ -240,7 +257,6 @@ function nextQuestion() {
     } else {
         count += 1;
     }
-    console.log("this is count" + count);
     fillIdentify();
 }
 
@@ -271,6 +287,215 @@ function fillResults() {
     $("#typelink").attr("href", ei_url + "type-" + num);
     $("#utypelink").attr("href", wing_url + "type-" + num + "-wing-" + higherNum);
     $("#ltypelink").attr("href", wing_url + "type-" + num + "-wing-" + lowerNum);
+}
+
+function fillIncResults() {
+    let final1 = localStorage.getItem("1");
+    let final2 = localStorage.getItem("2");
+    let final3 = localStorage.getItem("3");
+
+    let num1 = all_types[final1][1];
+    let num2 = all_types[final2][1];
+    let num3 = all_types[final3][1];
+
+    $(".Type1").html(num1);
+    $(".Type2").html(num2);
+    $(".Type3").html(num3);
+
+    // fill in URLs
+    $("#typelink1").attr("href", ei_url + "type-" + num1);
+    $("#typelink2").attr("href", ei_url + "type-" + num2);
+    $("#typelink3").attr("href", ei_url + "type-" + num3);
+
+    var array = [num1, num2, num3];
+    // CENTERS
+    identifyCenters(array);
+
+    // WINGS
+    identifyWings(array);
+
+    // STRESS / GROWTH
+    identifyArrows(array);
+
+    if ($("#possibilities").text().trim() == "Here are some possibilities:") {
+        $("#possibilities").html("Unfortunately, this test is unable to provide further analyses as your top 3 enneagram types have no relation to one another in neither Ennneagram Center, Wing Types, nor Stress/Growth Types. The Enneagram is meant to be explored over time, so perhaps that is a more accurate way to discover your dominant type.");
+    }
+
+    console.log($("#possibilities").text().trim());
+}
+
+function identifyCenters(array) {
+    var body = [8, 9, 1];
+    var heart = [2, 3, 4];
+    var mind = [5, 6, 7];
+
+    var bcount = [];
+    var hcount = [];
+    var mcount = [];
+
+    
+    for (var i = 0; i < array.length; i++) {
+        if (body.includes(array[i])) {
+            bcount.push(array[i]);
+        } else if (heart.includes(array[i])) {
+            hcount.push(array[i]);
+        } else if (mind.includes(array[i])) {
+            mcount.push(array[i]);
+        }
+    }
+
+    var text = "<li>";
+
+    // Body is dominant
+    if (bcount.length > 1) {
+        for (var j = 0; j < bcount.length; j++) {
+            text = text + "<b>Type " + bcount[j] +"</b>";
+            if (j == bcount.length - 1) {
+                text += " ";
+            } else if (j == bcount.length - 2) {
+                text += " and ";
+            } else {
+                text += ", ";
+            }
+        }
+
+        if (bcount.length == 2) {
+            text += "are both part of the Body Center, while ";
+            if (hcount.length == 1) {
+                text = text + "Type " + hcount[0] + " is part of the Heart Center. "
+            } else {
+                text = text + "Type " + mcount[0] + " is part of the Mind Center. "
+            }
+        } else if (bcount.length == 3) {
+            text += "are all part of the Body Center.";
+        }
+        
+        text += "There is a higher chance your dominant type is within the Body Center.";
+    } else if (hcount.length > 1) { // Heart is dominant
+        for (var k = 0; k < hcount.length; k++) {
+            text = text + "<b>Type " + hcount[k] +"</b>";
+            if (k == hcount.length - 1) {
+                text += " ";
+            } else if (k == hcount.length - 2) {
+                text += " and ";
+            } else {
+                text += ", ";
+            }
+        }
+
+        if (hcount.length == 2) {
+            text += "are both part of the Heart Center, while ";
+            if (bcount.length == 1) {
+                text = text + "Type " + bcount[0] + " is part of the Body Center. "
+            } else {
+                text = text + "Type " + mcount[0] + " is part of the Mind Center. "
+            }
+        } else if (hcount.length == 3) {
+            text += "are all part of the Heart Center.";
+        }
+        
+        text += "There is a higher chance your dominant type is within the Heart Center.";
+    } else if (mcount.length > 1) { // Mind is dominant
+        for (var l = 0; l < mcount.length; l++) {
+            text = text + "<b>Type " + mcount[l] +"</b>";
+            if (l == mcount.length - 1) {
+                text += " ";
+            } else if (l == mcount.length - 2) {
+                text += " and ";
+            } else {
+                text += ", ";
+            }
+        }
+
+        if (mcount.length == 2) {
+            text += "are both part of the Mind Center, while ";
+            if (bcount.length == 1) {
+                text = text + "Type " + bcount[0] + " is part of the Body Center. "
+            } else {
+                text = text + "Type " + hcount[0] + " is part of the Heart Center. "
+            }
+        } else if (mcount.length == 3) {
+            text += "are all part of the Mind Center.";
+        }
+        
+        text += "There is a higher chance your dominant type is within the Mind Center.";
+    } else { // nothing is dominant
+        text = "";
+    }
+
+    if (text != "") {
+        text += " (Check out <a href='https://www.integrative9.com/enneagram/centers/'>Enneagram Centers</a>)</li>";
+        $(".centers").html(text);
+    }  
+}
+
+function identifyWings(array) {
+    var text = "<li>There are possible wing combinations: ";
+
+    for (var i = 0; i < array.length; i++) {
+
+        var num = array[i];
+
+        var lowerNum = num - 1;
+        if (lowerNum == 0) {
+            lowerNum = 9;
+        }
+
+        var higherNum = num + 1;
+        if (higherNum == 10) {
+            higherNum = 1;
+        }
+        
+        if (array.includes(lowerNum)) {
+            text = text + "<b>" + num + "w" + lowerNum + "</b>, ";
+        }
+
+        if (array.includes(higherNum)) {
+            text = text + "<b>" + num + "w" + higherNum + "</b>, ";
+        }
+    }
+    
+    if (text != "<li>There are possible wing combinations: ") {
+        text = text.substring(0, text.length - 2);
+        text += "--which indicate that one of these combinations may be your dominant and wing type.</li>";
+        $(".wings").html(text);
+    }
+    
+}
+
+function identifyArrows(array) {
+    var text = "<li>You may also be confusing your dominant type with your stress and/or growth types: ";
+    var dict = {"1": ["7", "4"],
+                "2": ["4", "8"],
+                "3": ["6", "9"],
+                "4": ["1", "2"],
+                "5": ["8", "7"],
+                "6": ["9", "3"],
+                "7": ["5", "1"],
+                "8": ["2", "5"],
+                "9": ["3", "6"],
+    }
+
+    for (var i = 0; i < array.length; i++) {
+
+        var num = array[i];
+
+        var growth = dict[num][0];
+        if (array.includes(Number(growth))) {
+            text = text + "<b>Type " + num + "</b> integrates into <b>Type " + growth + "</b>. ";
+        }
+        console.log(growth);
+
+        var stress = dict[num][1];
+        if (array.includes(Number(stress))) {
+            text = text + "<b>Type " + num + "</b> disintegrates into <b>Type " + stress + "</b>. </li>";
+        }
+        
+    }
+
+    if (text != "<li>You may also be confusing your dominant type with your stress and/or growth types: ") {
+        $(".arrows").html(text);
+    }    
 }
 
 //accordion
