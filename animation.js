@@ -127,10 +127,6 @@ function explainTopThree() {
     localStorage.setItem("comparisons", array);
 }
 
-function questionOne() {
-    window.location.href = "identify.html";
-}
-
 var count = 0;
 var compArray = [localStorage.getItem("1") + localStorage.getItem("2"), 
                 localStorage.getItem("1") + localStorage.getItem("3"),
@@ -208,11 +204,13 @@ function submitAnswer() {
                 notPick = firstType;
             }
 
-            if (firstPlace == newPick) {
+            if (firstPlace == newPick) { // first place already determined
                 localStorage.setItem("final", "Type"+firstPlace);
                 window.location.href = "results.html";
+                continue
             } else if (secondPlace == newPick) {
                 localStorage.setItem("secondPlace", "N/A"); // first place has to be picked next to be valid. no other will be valid.
+                localStorage.setItem("secondPlace1", newPick);
             } else if (notPick == firstPlace) { // we reach here if the newPick was the new option that entered the scene. if newpick was picked over first place...
                 localStorage.setItem("firstPlace", newPick);
                 localStorage.setItem("secondPlace", "N/A"); // first place has to be picked to be valid
@@ -367,7 +365,7 @@ function identifyCenters(array) {
             text += "are all part of the Body Center.";
         }
         
-        text += "There is a higher chance your dominant type is within the Body Center.";
+        text += "There is a higher chance your dominant type is within the Body Center. ";
     } else if (hcount.length > 1) { // Heart is dominant
         for (var k = 0; k < hcount.length; k++) {
             text = text + "<b>Type " + hcount[k] +"</b>";
@@ -391,7 +389,7 @@ function identifyCenters(array) {
             text += "are all part of the Heart Center.";
         }
         
-        text += "There is a higher chance your dominant type is within the Heart Center.";
+        text += "There is a higher chance your dominant type is within the Heart Center. ";
     } else if (mcount.length > 1) { // Mind is dominant
         for (var l = 0; l < mcount.length; l++) {
             text = text + "<b>Type " + mcount[l] +"</b>";
@@ -415,7 +413,7 @@ function identifyCenters(array) {
             text += "are all part of the Mind Center.";
         }
         
-        text += "There is a higher chance your dominant type is within the Mind Center.";
+        text += "There is a higher chance your dominant type is within the Mind Center. ";
     } else { // nothing is dominant
         text = "";
     }
@@ -484,7 +482,7 @@ function identifyArrows(array) {
 
         var stress = dict[num][1];
         if (array.includes(Number(stress))) {
-            text = text + "<b>Type " + num + "</b> disintegrates into <b>Type " + stress + "</b>.";
+            text = text + "<b>Type " + num + "</b> disintegrates into <b>Type " + stress + "</b>. ";
         }
         
     }
