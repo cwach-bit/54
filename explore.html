@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="animation.js"></script>      
+        <script type="text/javascript" src="misidentifications.js"></script>  
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h2>3 / 3</h2>
+        <h3>
+            <span class="inconclusiveOrNot"></span>
+        <ul>
+            <li><a id="typelink1" target="_blank" href=""><b>Type <span class="Type1"></span></b></a></li>
+            <li><a id="typelink2" target="_blank" href=""><b>Type <span class="Type2"></span></b></a></li>
+            <li><a id="typelink3" target="_blank" href=""><b>Type <span class="Type3"></span></b></a></li>
+        </ul>
+
+        <div id="possibilities">However, there is a reason why these 3 are your top types. Here are some possibilities you should consider:
+            <ul>
+                <span class="wings"></span>
+                <span class="arrows"></span>
+            </ul>
+        </div>
+
+        <span class="conclusiveResults"></span>
+
+        <hr><br>
+
+        <div class="blurb"></div>
+        <br><table id="exptbl"></table><br>
+
+        <form action="">
+            <input type="radio" name="q" value="A" class="0"><div class="q" id="q2a">I'm more <span class="0"></span>.</div><br>
+            <input type="radio" name="q" value="B" class="1"><div class="q" id="q2b">I'm more <span class="1"></span>.</div><br>
+            <input type="radio" name="q" value="C" class="2"><div class="q" id="q2c">I'm more <span class="2"></span>.</div><br>
+
+            <button id="next2" onclick="submitAnswer2()"><h5>Next</h5></button>
+            <button id="skip2" onclick="nextQuestion2()"><h5>Skip</h5></button>
+            <button id="almost-done" style="display: none" visibility="hidden" onclick="submitAnswer3()"><h5>Let's see!</h5></button>
+        </form>
+
+        </h3>
+
+    </body>
+</html>

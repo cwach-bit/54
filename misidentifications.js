@@ -127,3 +127,79 @@ var mistypes = {"12": ["These two types are often easy to tell apart, unless som
                 }
 
 var list_mistypes = [mistype1, mistype2, mistype3, mistype4, mistype5, mistype6, mistype7, mistype8, mistype9];
+
+var grouptype1 = {"Center": "Body",
+                    "Social": "Compliant",
+                    "Conflict": "Competent",
+                    "Relational": "Frustration"
+                };
+
+var grouptype2 = {"Center": "Heart",
+                    "Social": "Compliant",
+                    "Conflict": "Positive Outlook",
+                    "Relational": "Rejection"
+                };
+
+var grouptype3 = {"Center": "Heart",
+                    "Social": "Assertive",
+                    "Conflict": "Competent",
+                    "Relational": "Attachment"
+                };
+
+var grouptype4 = {"Center": "Heart",
+                    "Social": "Withdrawn",
+                    "Conflict": "Reactive",
+                    "Relational": "Frustration"
+                };
+
+var grouptype5 = {"Center": "Mind",
+                    "Social": "Withdrawn",
+                    "Conflict": "Competent",
+                    "Relational": "Rejection"
+                };
+
+var grouptype6 = {"Center": "Mind",
+                    "Social": "Compliant",
+                    "Conflict": "Reactive",
+                    "Relational": "Attachment"
+                };
+
+var grouptype7 = {"Center": "Mind",
+                    "Social": "Assertive",
+                    "Conflict": "Positive Outlook",
+                    "Relational": "Frustration"
+                };
+
+var grouptype8 = {"Center": "Body",
+                    "Social": "Assertive",
+                    "Conflict": "Reactive",
+                    "Relational": "Rejection"
+                };
+
+var grouptype9 = {"Center": "Body",
+                    "Social": "Withdrawn",
+                    "Conflict": "Positive Outlook",
+                    "Relational": "Attachment"
+                };
+
+var groupexp = {"Center": "<b>Centers</b>: Each Centre of the Enneagram (Body, Heart, Mind) describes the main imbalances that exist in each personality type.",
+                    "Social": "<b>Social styles</b>: There are three ways (Assertive, Withdrawn, Compliant) in which people tried to solve their inner conflicts. These three ways also describe how people try to meet their needs.",
+                    "Conflict": "<b>Conflict styles</b>: These approaches describe how each type handles conflict, adversity, and situations in which our needs are not met.",
+                    "Relational": "<b>Relational styles</b>: Object Relations is a theory that comes from psychoanalysis that states (in a very small nutshell) that our first relationships as babies form the expectations of our adult relationships."
+                }
+
+var grouptypes = [grouptype1, grouptype2, grouptype3, grouptype4, grouptype5, grouptype6, grouptype7, grouptype8, grouptype9];
+
+var groupdescriptions = {"Body": "The essential qualities of this Centre involves the deep connection with the intelligence of the body, their instinct. Instinct is a type of knowledge that is not often recognized. Our instincts involve our sense of vitality and assertion. Instinct involves our inner wants and our ability to assert them in a way that is consistent and harmonious with the world around us.<br><br>At some point in their development, these types feel that they have lost these essential qualities -- that they have no sense of self and that they cannot assert their wants. Being unable to express themselves leads to an underlying feeling of rage.<br><br>To compensate, the personality tries to create and maintain a sense of self, where they are free to influence the world, but not be influenced by it. Consequently, the types in the Body Centre are motivated to find ways to feel autonomous and independent. One way to feel a sense of self is to carry tension in our bodies. Another is to create boundaries around us.",
+                            "Heart": "The essential qualities of this centre involve the deep connection with the intelligence of the heart. The heart is our source of feelings and emotional connection with others. It helps us recognize our love and value for ourselves and for others. Through feelings and value we understand our identity, who we (and others) really are.<br><br>At some point in their development, these types feel that they have lost these essential qualities -- that they have lost contact with their value and with their identity. They adopt a false belief that they are worthless, leading to an underlying feeling of shame.<br><br>To compensate, the personality tries to create and maintain a personal identity that will overcome these feelings. This self-image is based on memories and interpretations from their past. By identifying with this self-image, they create a false sense of value. These types spend a great deal of energy seeking validation from others to affirm this self-image.",
+                            "Mind": "The essential qualities of this centre involve the deep connection with the intelligence of the mind. The gifts of the mind include the ability to observe, perceive, and effortlessly understand. The mind also provides us with confidence and inner guidance.<br><br>At some point in their development, these types feel that they have lost these essential qualities -- that they have lost contact with their inner guidance. They adopt a false belief that they have no inner support or confidence, leading to underlying feelings of fear and anxiety. They see the world as a threatening and uncertain place.<br><br>To compensate, these types become very motivated to find sources of security and confidence. They try to anticipate and prepare for the future. They spend their time trying to find and maintain a sense of inner guidance and support. These types pursue mental strategies and/or belief systems to create a false sense of security against anxiety.",
+                            "Compliant": "People whose dominant Social Style is the compliant style are responsible, dedicated and want to do what's expected of them. They will do what they believe is best, even if it means sacrificing their own wants. They are committed to their promises, working hard to finish what they said they would do. They have a hard time relaxing or playing, because there is always work to do (and they would feel guilty resting when there is work to do). They have a sense of being a little superior to others, although this characteristic is very subtle. Under stress, they seek advice from their conscience to determine the right thing to do.",
+                            "Withdrawn": "People whose dominant Social Style is the withdrawn style are quiet, introverted, and introspective. They enjoy spending lots of time by themselves and feel uncomfortable in large groups. They don't overtly seek attention and don't wish to assert themselves much. The feel uncomfortable taking charge or in competition. Instead, they feel excited by their own imagination. They have a sense of being different from others and not being part of their environment. Under stress, they withdraw from the world and into their inner space and imagination.",
+                            "Assertive": "People whose dominant Social Style is the assertive style are independent, extroverted and energetic. They are party people who take charge and want to make things happen. They get involved in their environment, meeting life head on, unwilling to withdraw from it. These people know what they want and go directly after it. They have a sense of importance and feel that they are central to the important things in their world. When they are stressed, they reinforce their self-importance and push back against obstacles.",
+                            "Positive Outlook": "People whose dominant Harmonic approach is the Positive Outlook approach are generally optimistic and tend to avoid negative thoughts or situations. Under stress, they seek to avoid the problem, distract themselves with something else, or minimize the problem. These types want to feel good and want others around them feel good. They would rather have everyone happy (including themselves) than to deal with problems or negativity (especially in themselves). Unfortunately this approach can lead them to deny the existence of their problems and therefore delay addressing them.",
+                            "Competent": "People whose dominant Harmonic approach is the Competency approach try solving problems in an objective, unemotional manner. Unlike people of the reactive approach, they don't get worked up when problems happen, they remain cool and emotionally detached from them.",
+                            "Reactive": "People whose dominant Harmonic approach is the reactive approach are emotionally reactive under stress. They tend to work themselves up when a problem happens and have a hard time containing their feelings. This emotional intensity allows them to feel the 'realness' of the problem, even if it is a relatively small one. Venting their frustration allows them to move on to dealing with the issue. Wanting others to see the realness of the problem, they expect others to react emotionally. Such a reaction would confirm that others agree that indeed this is a big deal. If others don't respond in the way the Reactive approach types want, they may become even more frustrated and emotional.",
+                            "Attachment": "People with the attachment object relation tend to have a sense of contentment that their needs (with people, situation, thinks) are being met. Their sense of self is based on being deeply attached to things perceived as good. To attach themselves, these types adapt their ways to be consistent with important people or things.",
+                            "Frustration": "People with the frustration object relation know what will make them happy, but they feel they seldom have it. However, once they find the source of their happiness, they tend to become disappointed and disillusioned with it. As a result, they become frustrated as they begin their search again. Their sense of self is based on the search for an ideal. These types need to remember that they can find contentment by accepting their present experience.",
+                            "Rejection": "People with the rejection object relation feel that they have been rejected by others. Others don't care about their needs, so they reject their own needs too. Consequently, their relationships often have issues of not wanting to be nurtured or touched. Despite feeling rejected, they feel they only have one gift to offer to prevent future rejection. Their sense of self is based on countering this rejection by offering their talent.",
+                        };
