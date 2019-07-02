@@ -107,9 +107,6 @@ function explainTopThree() {
     let num1 = all_types[first][1];
     let num2 = all_types[sec][1];
     let num3 = all_types[third][1];
-    if (Math.abs(num1 - num2) == 1 || Math.abs(num2 - num3) == 1 || Math.abs(num3 - num1) == 1) {
-        $("#wing_explanation").html(wing_text);
-    }
 
     let exp1 = all_types[first][6];
     let exp2 = all_types[sec][6];
