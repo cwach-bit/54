@@ -314,7 +314,7 @@ function fillIncResults() {
     // STRESS / GROWTH
     identifyArrows(array);
 
-    if ($("#possibilities").text().trim() == "Here are some possibilities:") {
+    if ($("#possibilities").text().trim() == "There's a reason why these 3 are your top types. Here are some possibilities you should consider:") {
         $("#possibilities").html("Unfortunately, this test is unable to provide further analyses as your top 3 enneagram types have no relation to one another in neither Ennneagram Center, Wing Types, nor Stress/Growth Types. The Enneagram is meant to be explored over time, so perhaps that is a more accurate way to discover your dominant type.");
     }
 
