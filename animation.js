@@ -368,6 +368,7 @@ function fillExplore() {
         num1 = all_types[final1][1];
         num2 = all_types[final2][1];
         num3 = all_types[final3][1];
+        console.log(num2);
 
         final.push(num1, num2);
 
@@ -376,9 +377,9 @@ function fillExplore() {
         $(".conclusiveResults").html("Based off this ranking, we will focus only on the top two types: <b>Type " + num1 + "</b> and <b>Type " + num2 + "</b>. In this section, we will be breaking down different traits that characterize each type. If you are particularly stumped on a comparison, you can come back to it after looking at the other comparisons. <b>There are only a few comparisons, so think about it before clicking 'Next'!</b> (Source: Rob Fitzel) <br>");
     }
 
-    $("#firstTypeName").html("Type " +num1);
-    $("#secondTypeName").html("Type " + num2);
-    $("#thirdTypeName").html("Type " + num3);
+    $("#firstTypeName1").html("Type " + num1);
+    $("#secondTypeName1").html("Type " + num2);
+    $("#thirdTypeName1").html("Type " + num3);
 
     // fill in URLs
     $("#typelink1").attr("href", ei_url + "type-" + num1);
