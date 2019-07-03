@@ -184,6 +184,7 @@ function fillIdentify() {
         html += "</tr>"
     }
     $('input:checked').attr('checked',false);
+    console.log(html);
     $("#tbl").html(html); // idk
 }
 
@@ -368,7 +369,6 @@ function fillExplore() {
         num1 = all_types[final1][1];
         num2 = all_types[final2][1];
         num3 = all_types[final3][1];
-        console.log(num2);
 
         final.push(num1, num2);
 
