@@ -381,14 +381,6 @@ function fillExplore() {
     $("#secondTypeName1").html("Type " + num2);
     $("#thirdTypeName1").html("Type " + num3);
 
-    let exp1 = all_types["Type" + num1][6];
-    let exp2 = all_types["Type" + num2][6];
-    let exp3 = all_types["Type" + num3][6];
-
-    $("#readFirstType1").html(exp1);
-    $("#readSecondType1").html(exp2);
-    $("#readThirdType1").html(exp3);
-
     // fill in URLs
     $("#typelink1").attr("href", ei_url + "type-" + num1);
     $("#typelink2").attr("href", ei_url + "type-" + num2);
