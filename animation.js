@@ -184,7 +184,7 @@ function fillIdentify() {
         html += "</tr>"
     }
     $('input:checked').attr('checked',false);
-    $("table").html(html);
+    $("#tbl").html(html); // idk
 }
 
 function submitAnswer() {
@@ -427,7 +427,7 @@ function fillExploreCompare() {
             html += "</tr>";
 
             $('input:checked').attr('checked',false);
-            $("table").html(html);
+            $("#exptbl").html(html); // idk why this is here
 
         } else { // otherwise...bye bye
             if (count == groupArray.length - 1) {
