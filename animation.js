@@ -473,7 +473,6 @@ function newQuestion() {
 function submitAnswer3() {
     event.preventDefault();
     var firstPlace = localStorage.getItem("firstPlace");
-    var secondPlace = localStorage.getItem("secondPlace");
 
     if ($("input:checked")[0] != undefined) {
         var input = $("input:checked")[0].value;
@@ -501,7 +500,7 @@ function submitAnswer3() {
                 localStorage.setItem("agree", "true");
             }
 
-            if (firstPlace != "N/A" && numCount == 2) { // if 3rd part was much more wishy washy compared to 1st part
+            if (firstPlace != "N/A" && maxNum == 2) { // if 3rd part was much more wishy washy compared to 1st part
                 if (input != firstPlace) {
                     localStorage.setItem("agree", "false");
                 } else {
