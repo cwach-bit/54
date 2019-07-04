@@ -507,8 +507,10 @@ function submitAnswer3() {
                 } else {
                     localStorage.setItem("agree", "true");
                 }
+                console.log("nvm");
                 localStorage.setItem("final", "Type" + firstPlace);
             } else {
+                console.log("okie");
                 localStorage.setItem("final", "Type" + num); // otherwise if no conclusive first place OR the count that selected this num was high enough
             } 
         }
