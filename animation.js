@@ -184,7 +184,6 @@ function fillIdentify() {
         html += "</tr>"
     }
     $('input:checked').attr('checked',false);
-    console.log(html);
     $("#tbl").html(html); // idk
 }
 
@@ -566,7 +565,6 @@ function savePart3_1(num) {
 function savePart3_2(table) {
     var html = localStorage.getItem("answerKey");
     html += "<br><table>" + table + "</table><br>";
-    console.log(html);
     localStorage.setItem("answerKey", html);
 }
 
