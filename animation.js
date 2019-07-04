@@ -507,6 +507,9 @@ function submitAnswer3() {
                 }
                 console.log("nvm");
                 localStorage.setItem("final", "Type" + firstPlace);
+                var html = localStorage.getItem("answerKey");
+                html += "<br><br>*Although Type " + firstPlace + " was outranked by Type " + num + " in Part 3, your Part 2 results were much more conclusive than Part 3 results.";
+                localStorage.setItem("answerKey", html);
             } else {
                 console.log("okie");
                 localStorage.setItem("final", "Type" + num); // otherwise if no conclusive first place OR the count that selected this num was high enough
