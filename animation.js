@@ -478,7 +478,7 @@ function submitAnswer3() {
     if ($("input:checked")[0] != undefined) {
         var input = $("input:checked")[0].value;
         var maxNum = Math.max.apply(null, finalArray)
-        // check if unique
+        // check if unique and for second highest
         var numCount = 0;
         for (var i=0; i < final.length; i++) {
             if (maxNum == finalArray[i]) {
@@ -490,16 +490,27 @@ function submitAnswer3() {
         var index = finalArray.indexOf(maxNum);
         var num = final[index];
         
-        if (numCount > 1) { // inconclusive, spit out what they think they are
+        if (numCount > 1 && firstPlace == "N/A") { // inconclusive, spit out what they think they are
+            console.log("heh");
             localStorage.setItem("final", "Type" + input);
             localStorage.setItem("agree", "true");
-        } else { // conclusive, spit out what this test revealed (hopefully.........)    
+        } else { // conclusive, spit out what this test revealed (hopefully.........)   
             if (input != num) {
                 localStorage.setItem("agree", "false");
             } else {
                 localStorage.setItem("agree", "true");
             }
-            localStorage.setItem("final", "Type" + num);
+
+            if (firstPlace != "N/A" && numCount == 2) { // if 3rd part was much more wishy washy compared to 1st part
+                if (input != firstPlace) {
+                    localStorage.setItem("agree", "false");
+                } else {
+                    localStorage.setItem("agree", "true");
+                }
+                localStorage.setItem("final", "Type" + firstPlace);
+            } else {
+                localStorage.setItem("final", "Type" + num); // otherwise if no conclusive first place OR the count that selected this num was high enough
+            } 
         }
 
         window.location.href = "results.html";
