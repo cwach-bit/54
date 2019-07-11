@@ -499,7 +499,7 @@ function submitAnswer3() {
                 localStorage.setItem("agree", "true");
             }
 
-            if (firstPlace != "N/A" && maxNum == 2) { // if 3rd part was much more wishy washy compared to 1st part
+            if (firstPlace != "N/A" && maxNum <= 2) { // if 3rd part was much more wishy washy compared to 1st part
                 if (input != firstPlace) {
                     localStorage.setItem("agree", "false");
                 } else {
@@ -507,8 +507,9 @@ function submitAnswer3() {
                 }
                 console.log("nvm");
                 localStorage.setItem("final", "Type" + firstPlace);
+
                 var html = localStorage.getItem("answerKey");
-                html += "<br><br>*Although Type " + firstPlace + " was outranked by Type " + num + " in Part 3, your Part 2 results were much more conclusive than Part 3 results.";
+                html += "<br>*Although Type " + firstPlace + " was outranked by Type " + num + " in Part 3, your Part 2 results were much more conclusive than Part 3 results.";
                 localStorage.setItem("answerKey", html);
             } else {
                 console.log("okie");
