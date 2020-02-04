@@ -113,7 +113,9 @@ $(window).load(function() {
     fillIdentify();
     fillExplore();
     fillExploreCompare();
-    fillResults(); // on results.html
+    // if (localStorage.getItem("final")) {
+     fillResults(); // on results.html
+    // }
 });
 
 function explainTopThree() {
