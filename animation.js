@@ -7,7 +7,7 @@ var all_types = { // Type : Letter, Number, Q1, Q2, Verse, Song, Summary // Satu
                 "Being told I'm wrong.",
                 "Romans 5:8, 'God shows his love for us in that while we were still sinners, Christ died for us.'",
                 "https://www.youtube.com/embed/-sO2UMoOaFQ",
-                "Ones are conscientious and ethical, with a strong sense of right and wrong. They are teachers, crusaders, and advocates for change: always striving to improve things, but afraid of making a mistake. Well-organized, orderly, and fastidious, they try to maintain high standards, but can slip into being critical and perfectionistic. They typically have problems with resentment and impatience. At their Best: wise, discerning, realistic, and noble. Can be morally heroic."],
+                "Ones are conscientious and ethical, with a strong sense of right and wrong. They are teachers, crusaders, and advocates for change: always striving to improve things, but afraid of making a mistake. Well-organized, orderly, and fastidious, they try to maintain high standards, but can slip into being critical and perfectionistic. They typically have problems with resentment and impatience. At their best: wise, discerning, realistic, and noble. Can be morally heroic."],
     "Type2": ["D",
                 2,
                 "I want to satisfy the people around me most, even if it requires me to go the extra mile. Maybe next time, my friends will think of me first.",
